@@ -3,11 +3,11 @@ fetch('https://dummyjson.com/products')
         if (res.ok) {
             console.log("success")
         } else {
-            console.log("not successful")
+            throw new Error(`Failed to receive a valid network response ${res.statusText}`);
         }
     return res.json()
     })
     .then(data => console.log(data))
-    .catch(error => console.log('error'))
-
-    
+    .catch(error => {
+        console.error(error.message);
+      })
