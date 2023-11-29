@@ -5,7 +5,7 @@ fetch('https://dummyjson.com/products')
         } else {
             console.log("not successful")
         }
-    res.json()
+    return res.json()
     })
     .then(data => console.log(data))
     .catch(error => console.log('error'))
