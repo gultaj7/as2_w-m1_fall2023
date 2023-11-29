@@ -1,5 +1,13 @@
 fetch('https://dummyjson.com/products')
-    .then(res => res.json())
+    .then(res => {
+        if (res.ok) {
+            console.log("success")
+        } else {
+            console.log("not successful")
+        }
+    res.json()
+    })
     .then(data => console.log(data))
+    .catch(error => console.log('error'))
 
     
