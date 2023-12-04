@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 const URL = 'https://dummyjson.com/products'
+const container = document.getElementById('productContainer');
 
 fetch(URL)
     .then(res => {
