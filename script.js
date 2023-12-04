@@ -12,10 +12,11 @@ fetch(URL)
     return res.json()
     })
     .then(data => {
-            if (data && typeof data === 'object') {
-                console.log(data);
-            } else {
-                console.error('Invalid data format: Expected an object of products, received:', data);
+        if (data && Array.isArray(data.products)) {
+            displayProducts(data.products);
+        }
+         else {
+                console.error('Invalid data format');
             }
     })
     .catch(error => {
