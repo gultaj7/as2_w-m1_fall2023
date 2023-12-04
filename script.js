@@ -1,4 +1,6 @@
-fetch('https://dummyjson.com/products')
+const URL = 'https://dummyjson.com/products'
+
+fetch(URL)
     .then(res => {
         if (res.ok) {
             console.log("success")
