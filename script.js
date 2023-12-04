@@ -14,7 +14,7 @@ fetch(URL)
     })
     .then(data => {
         if (data && Array.isArray(data.products)) {
-            displayProducts(data.products);
+            renderProducts(data.products);
         }
          else {
                 console.error('Invalid data format');
@@ -23,5 +23,27 @@ fetch(URL)
     .catch(error => {
         console.error(error.message);
       })
+
+      const renderProducts = (products) => {
+        productContainer.innerHTML = '';
+    
+        if (products.length === 0) {
+            productContainer.innerHTML = '<p>No matching products found.</p>';
+        } else {
+          products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product-item');
+            productDiv.innerHTML = `
+                <h2>${product.title}</h2>
+                <p>Price: $${product.price}</p>
+                <p>Discount: ${product.discountPercentage}%</p>
+                <p>Category: ${product.category}</p>
+                <p>Stock: ${product.stock}</p>
+                <img src="${product.thumbnail}" alt="${product.title}">
+            `;
+            productContainer.appendChild(productDiv);
+          });
+        }
+      };
 
     })
