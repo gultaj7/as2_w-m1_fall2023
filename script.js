@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function () {
+
 const URL = 'https://dummyjson.com/products'
 
 fetch(URL)
@@ -19,3 +21,5 @@ fetch(URL)
     .catch(error => {
         console.error(error.message);
       })
+
+    })
