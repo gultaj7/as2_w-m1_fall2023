@@ -5,6 +5,22 @@ document.addEventListener('DOMContentLoaded', function () {
   const search = document.getElementById('search');
   const filter = document.getElementById('filter');
   let productsData = []; 
+
+  const showFilteredProducts = () => {
+    const searchTerm = search.value.toLowerCase().trim();
+    const selectedCategory = filter.value.toLowerCase().trim();
+    
+    const filteredProducts = productsData.filter(product => {
+      const matchesSearch = product.title.toLowerCase().includes(searchTerm) ||
+                            product.description.toLowerCase().includes(searchTerm) ||
+                            product.category.toLowerCase().includes(searchTerm);
+      const matchesCategory = selectedCategory === '' || product.category.toLowerCase() === selectedCategory;
+    
+      return matchesSearch && matchesCategory;
+    });
+    
+    renderProductItems(filteredProducts);
+  };
   
   fetch(URL)
       .then(res => {
