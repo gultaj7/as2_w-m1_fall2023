@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Product Detail</title>
+    <title>Product Detail</title>
 </head>
 <body>
-    
+
+    <div id="productDetails"></div>
+
+    <script>
+        fetch(`https://dummyjson.com/products/${productId}`)
+    .then(res => {
+        if (res.ok) {
+            console.log("fetching data is successful")
+        } else {
+            throw new Error(`Failed to receive a valid network response ${res.statusText}`);
+        }
+    return res.json()
+    })
+    .then(data => {
+        if (data && Array.isArray(data.products)) {
+            {
+                const productDiv = document.createElement('div');
+                productDiv.innerHTML = `
+                    <h2>${product.title}</h2>
+                    <img src="${product.thumbnail}" alt="${product.name}">
+                    <p>Description: ${product.description}</p>
+                    <p>Price: $${product.price}</p>
+                `;
+                productDetail.appendChild(productDiv);
+            }
+        }
+         else {
+                console.error('Invalid data format');
+            }
+    })
+    .catch(error => {
+        console.error(error.message);
+      })
+    </script>
 </body>
 </html>
