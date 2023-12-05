@@ -39,11 +39,24 @@ fetch(URL)
                 <p>Discount: ${product.discountPercentage}%</p>
                 <p>Category: ${product.category}</p>
                 <p>Stock: ${product.stock}</p>
-                <img src="${product.thumbnail}" alt="${product.title}">            
+                <img src="${product.thumbnail}" alt="${product.title}"><br> 
+                <button class="view-details" data-id="${product.id}">View Details</button>
+           
             `;
             productContainer.appendChild(productDiv);
           });
         }
       };
 
+      productContainer.addEventListener('click', (event) => {
+        const clickedElement = event.target;
+        if (clickedElement.classList.contains('view-details')) {
+            const productId = clickedElement.getAttribute('data-id');
+            goToProductDetail(productId);
+        }
+    });
+    
+    function goToProductDetail(productId) {
+      window.location.href = `productDetail.html?id=${productId}`;
+    }
     })
