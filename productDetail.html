@@ -28,6 +28,10 @@
                 })
                 .then(data => {
 
+                    const productDiv = document.getElementById('productDetails');
+
+                    let productDetailContent = `<h2>${data.title}</h2>`;
+
                     if (data.images && Array.isArray(data.images)) {
                         const galleryContainer = document.getElementById('gallery');
                         data.images.forEach(function (imageUrl) {
@@ -36,19 +40,21 @@
                             galleryImage.alt = data.title; // Using data.title instead of productDetails.title
                             galleryContainer.appendChild(galleryImage);
                         });
-                    } else {
-                        console.error('Images property is missing or not an array');
-                    }
-
-                    const productDiv = document.getElementById('productDetails');
-                    productDiv.innerHTML = `
-                        <h2>${data.title}</h2>
+                        productDetailContent += `
                         <p>${data.description}</p>
                         <p>Price: $${data.price}</p>
                         <p>Discount: ${data.discountPercentage}%</p>
                         <p>Category: ${data.category}</p>
                         <p>Stock: ${data.stock}</p>
                     `;
+
+                    } else {
+                        console.error('Images property is missing or not an array');
+                    }
+
+                    productDiv.innerHTML = productDetailContent;
+
+                    
                     productDetails.appendChild(productDiv);
                 })
                 .catch(error => {
