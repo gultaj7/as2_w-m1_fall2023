@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const URL = 'https://dummyjson.com/products'
   const container = document.getElementById('productContainer');
+  const search = document.getElementById('search');
+  const filter = document.getElementById('filter');
+  let productsData = []; 
   
   fetch(URL)
       .then(res => {
