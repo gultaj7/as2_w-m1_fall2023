@@ -32,12 +32,29 @@ document.addEventListener('DOMContentLoaded', function () {
       return res.json()
       })
       .then(data => {
-          if (data && Array.isArray(data.products)) {
-              renderProductItems(data.products);
-          }
-           else {
-                  console.error('Invalid data format');
-              }
+        if (data && Array.isArray(data.products)) {
+          productsData = data.products;
+          renderProductItems(productsData);
+      
+          const uniqueCategories = [...new Set(productsData.map(product => product.category))];
+          
+          filter.innerHTML = '<option value="">All Categories</option>';
+      
+          uniqueCategories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.toLowerCase();
+            option.textContent = category;
+            filter.appendChild(option);
+          });
+      
+          search.addEventListener('input', showFilteredProducts);
+          filter.addEventListener('change', showFilteredProducts);
+      
+        }
+        else {
+          console.error('Invalid data format');
+        }
+      
       })
       .catch(error => {
           console.error(error.message);
