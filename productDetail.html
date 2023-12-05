@@ -27,12 +27,27 @@
                     return res.json();
                 })
                 .then(data => {
+
+                    if (data.images && Array.isArray(data.images)) {
+                        const galleryContainer = document.getElementById('gallery');
+                        data.images.forEach(function (imageUrl) {
+                            const galleryImage = document.createElement('img');
+                            galleryImage.src = imageUrl;
+                            galleryImage.alt = data.title; // Using data.title instead of productDetails.title
+                            galleryContainer.appendChild(galleryImage);
+                        });
+                    } else {
+                        console.error('Images property is missing or not an array');
+                    }
+
                     const productDiv = document.getElementById('productDetails');
                     productDiv.innerHTML = `
                         <h2>${data.title}</h2>
-                        <img src="${data.thumbnail}" alt="${data.name}">
-                        <p>Description: ${data.description}</p>
+                        <p>${data.description}</p>
                         <p>Price: $${data.price}</p>
+                        <p>Discount: ${data.discountPercentage}%</p>
+                        <p>Category: ${data.category}</p>
+                        <p>Stock: ${data.stock}</p>
                     `;
                     productDetails.appendChild(productDiv);
                 })
