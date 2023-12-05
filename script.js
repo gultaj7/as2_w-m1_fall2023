@@ -14,7 +14,7 @@ fetch(URL)
     })
     .then(data => {
         if (data && Array.isArray(data.products)) {
-            renderProducts(data.products);
+            renderProductItems(data.products);
         }
          else {
                 console.error('Invalid data format');
@@ -24,7 +24,7 @@ fetch(URL)
         console.error(error.message);
       })
 
-      const renderProducts = (products) => {
+      const renderProductItems = (products) => {
         productContainer.innerHTML = '';
     
         if (products.length === 0) {
@@ -32,7 +32,7 @@ fetch(URL)
         } else {
           products.forEach(product => {
             const productDiv = document.createElement('div');
-            productDiv.classList.add('product-item');
+            // productDiv.classList.add('product-item');
             productDiv.innerHTML = `
                 <h2>${product.title}</h2>
                 <p>Price: $${product.price}</p>
