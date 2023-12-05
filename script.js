@@ -39,7 +39,7 @@ fetch(URL)
                 <p>Discount: ${product.discountPercentage}%</p>
                 <p>Category: ${product.category}</p>
                 <p>Stock: ${product.stock}</p>
-                <img src="${product.thumbnail}" alt="${product.title}">
+                <img src="${product.thumbnail}" alt="${product.title}">            
             `;
             productContainer.appendChild(productDiv);
           });

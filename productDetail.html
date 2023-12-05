@@ -10,35 +10,35 @@
     <div id="productDetails"></div>
 
     <script>
-        fetch(`https://dummyjson.com/products/${productId}`)
-    .then(res => {
-        if (res.ok) {
-            console.log("fetching data is successful")
-        } else {
-            throw new Error(`Failed to receive a valid network response ${res.statusText}`);
-        }
-    return res.json()
-    })
-    .then(data => {
-        if (data && Array.isArray(data.products)) {
-            {
-                const productDiv = document.createElement('div');
-                productDiv.innerHTML = `
-                    <h2>${product.title}</h2>
-                    <img src="${product.thumbnail}" alt="${product.name}">
-                    <p>Description: ${product.description}</p>
-                    <p>Price: $${product.price}</p>
-                `;
-                productDetail.appendChild(productDiv);
-            }
-        }
-         else {
-                console.error('Invalid data format');
-            }
-    })
-    .catch(error => {
-        console.error(error.message);
-      })
+        document.addEventListener('DOMContentLoaded', function () {
+            const productDetails = document.getElementById('productDetails');
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = urlParams.get('id');
+            
+            fetch(`https://dummyjson.com/products/${productId}`)
+                .then(res => {
+                    if (res.ok) {
+                        console.log("Fetching data is successful");
+                    } else {
+                        throw new Error(`Failed to receive a valid network response ${res.statusText}`);
+                    }
+                    return res.json();
+                })
+                .then(data => {
+                    const productDiv = document.getElementById('productDetails');
+                    productDiv.innerHTML = `
+                        <h2>${data.title}</h2>
+                        <img src="${data.thumbnail}" alt="${data.name}">
+                        <p>Description: ${data.description}</p>
+                        <p>Price: $${data.price}</p>
+                    `;
+                    productDetails.appendChild(productDiv);
+                })
+                .catch(error => {
+                    console.error(error.message);
+                });
+        });
     </script>
 </body>
 </html>
